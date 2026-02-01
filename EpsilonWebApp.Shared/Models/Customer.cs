@@ -1,4 +1,5 @@
-﻿namespace EpsilonWebApp.Models
+﻿namespace EpsilonWebApp.Shared.Models
+
 {
     public class Customer
     {

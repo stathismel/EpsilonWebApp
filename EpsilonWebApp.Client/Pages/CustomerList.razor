@@ -1,0 +1,51 @@
+﻿@page "/customers"
+@using EpsilonWebApp.Shared.Models
+@inject HttpClient Http
+
+<h3>CustomerList</h3>
+
+@if (listaPelatwn == null)
+{
+    <p><em>Φόρτωση...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Contact Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Region</th>
+                <th>Postal Code</th>
+                <th>Country</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pelatis in listaPelatwn)
+            {
+                <tr>
+                    <td>@pelatis.CompanyName</td>
+                    <td>@pelatis.ContactName</td>
+                    <td>@pelatis.Address</td>
+                    <td>@pelatis.City</td>
+                    <td>@pelatis.Region</td>
+                    <td>@pelatis.PostalCode</td>
+                    <td>@pelatis.Country</td>
+                    <td>@pelatis.Phone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Customer[]? listaPelatwn;
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaPelatwn = await Http.GetFromJsonAsync<Customer[]>("api/customers");
+    }
+}
